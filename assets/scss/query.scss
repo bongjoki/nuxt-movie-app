@@ -1,0 +1,34 @@
+$breakpoints: (
+  xs: 0,
+  sm: 599,
+  md: 720,
+  lg: 960,
+  xl: 1440,
+  xxl: 1920,
+);
+
+// 디스플레이 헬퍼: @include display(md, flex)
+@mixin display($size, $dp) {
+  @include media($size) {
+    display: $dp !important;
+  }
+}
+
+// 미디어 쿼리: @include between_width_media(xs,sm)
+@mixin between_width_media($min_width, $max_width) {
+  $min_width_value: map-get($breakpoints, $min_width);
+  $max_width_value: map-get($breakpoints, $max_width);
+  @media (min-width: #{$min_width_value}px) and (max-width: #{$max_width_value - 1}px) {
+    @content;
+  }
+}
+
+// 미디어 쿼리: @include min_width_media(xs,sm)
+@mixin min_width_media($min_width) {
+  $min_width_value: map-get($breakpoints, $min_width);
+  @media (min-width: #{$min_width_value}px) {
+    @content;
+  }
+}
+
+$tomatoCol: tomato;
